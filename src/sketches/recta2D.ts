@@ -55,7 +55,8 @@ export const recta2DSketch = (p: p5) => {
 		// Dibujar rejilla tenue (opcional)
 		p.stroke(200, 50);
 		p.strokeWeight(1 / sc);
-		const range = 10; // Cuántas unidades dibujar a cada lado
+
+		const range = Math.floor(p.width > p.height ? p.width / 2 / sc : p.height / 2 / sc); // Cuántas unidades dibujar a cada lado
 		for (let i = -range; i <= range; i++) {
 			p.line(i, -range, i, range); // Líneas verticales
 			p.line(-range, i, range, i); // Líneas horizontales
@@ -65,26 +66,22 @@ export const recta2DSketch = (p: p5) => {
 		p.textAlign(p.CENTER, p.CENTER);
 
 		p.strokeWeight(2 / sc);
-		// p.stroke(200);
 		p.textSize(12 / sc);
-		// p.noStroke();
 		p.fill(250); // Color del texto
 		for (let i = -range; i <= range; i++) {
 			if (i === 0) continue; // Saltar el origen
 
 			// Marcas en X
-			p.noStroke();
-			p.text(i, i, 20 / sc); // Número debajo del eje
-
 			p.stroke(200);
 			p.line(i, -5 / sc, i, 5 / sc);
-
 			// Marcas en Y
-			p.noStroke();
-			p.text(-i, -20 / sc, i);
-
-			p.stroke(200);
 			p.line(-5 / sc, i, 5 / sc, i);
+
+			// Números en X
+			p.noStroke();
+			p.text(i, i, 20 / sc); // Número debajo del eje
+			// Números en Y
+			p.text(-i, -20 / sc, i);
 		}
 
 		const mag = p.width / 4 / Math.sqrt(data.vector.vx * data.vector.vx + data.vector.vy * data.vector.vy)
@@ -98,7 +95,7 @@ export const recta2DSketch = (p: p5) => {
 		// 4. Dibujar el Arco del Ángulo
 		p.noFill();
 		p.stroke(250);
-		p.strokeWeight(2 / sc);
+		// p.strokeWeight(2 / sc);
 		// Dibujamos un arco de 40px de radio
 		p.arc(data.punto.x, data.punto.y, 40 / sc, 40 / sc, Math.min(angleRad, 0), Math.max(angleRad, 0));
 

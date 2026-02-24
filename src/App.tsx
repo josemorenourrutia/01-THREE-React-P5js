@@ -10,6 +10,7 @@ function App() {
     punto: { x: 2, y: 3 },
     vector: { vx: 2, vy: 3 },
     color: '#ffff00',
+    escala: 40, // 1 unidad = 40 píxeles
     active: false//isActive
   };
   return (
@@ -17,6 +18,7 @@ function App() {
       <h1>Geometria 3D amb TypeScript</h1>
       <ThreeCanvas SceneClass={BasicScene} />
       {/* <ThreeCanvas SceneClass={BasicScene} bgColor='#1a1a1a' /> */}
+
       {/* <button onClick={() => setIsActive(!isActive)}>
         {isActive ? '⏸️ Pausar' : '▶️ Reanudar'}
       </button> */}

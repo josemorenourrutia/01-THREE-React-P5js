@@ -11,14 +11,6 @@ export const P5Canvas = ({ sketch, params }: P5Props) => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const instanceRef = useRef<p5 | null>(null);
 
-	// Función auxiliar para enviar el estado de pausa al sketch
-	const togglePause = (isActive: boolean) => {
-		if (instanceRef.current && (instanceRef.current as any).updateParams) {
-			// Fusionamos los params actuales con el nuevo estado 'active'
-			(instanceRef.current as any).updateParams({ ...params, active: isActive });
-		}
-	};
-
 	useEffect(() => {
 		let p5Instance: p5 | null = null;
 
@@ -48,23 +40,5 @@ export const P5Canvas = ({ sketch, params }: P5Props) => {
 		}
 	}, [params]);
 
-	return (
-		<div
-			ref={containerRef}
-			className="not-content"
-			style={{
-				lineHeight: 0,
-				cursor: 'crosshair',
-				width: '100%',    // Ocupa todo el ancho del padre
-				height: '400px',  // O el alto que desees (puedes pasarlo por props)
-				background: 'transparent', // O el color de tu App
-				position: 'relative',
-				overflow: 'hidden'
-			}}
-			// style={{ lineHeight: 0, cursor: 'crosshair', border: '1px solid #eee' }}
-			// EVENTOS DE BATERÍA / CPU:
-			onMouseEnter={() => togglePause(true)}  // Reanuda al entrar
-			onMouseLeave={() => togglePause(false)} // Pausa al salir
-		/>
-	);
+	return <div ref={containerRef} className="not-content" style={{ lineHeight: 0 }} />;
 };
